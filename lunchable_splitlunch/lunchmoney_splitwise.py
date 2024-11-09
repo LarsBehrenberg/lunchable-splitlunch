@@ -1066,6 +1066,7 @@ class SplitLunch(splitwise.Splitwise):
 
     def get_new_transactions(
         self,
+        group_id: Optional[int] = None,
         dated_after: Optional[datetime.datetime] = None,
         dated_before: Optional[datetime.datetime] = None,
     ) -> Tuple[List[SplitLunchExpense], List[TransactionObject]]:
@@ -1094,6 +1095,7 @@ class SplitLunch(splitwise.Splitwise):
         }
         splitwise_expenses = self.get_expenses(
             limit=0,
+            group_id=group_id,
             dated_after=dated_after,
             dated_before=dated_before,
         )
@@ -1152,6 +1154,7 @@ class SplitLunch(splitwise.Splitwise):
         self,
         dated_after: Optional[datetime.datetime] = None,
         dated_before: Optional[datetime.datetime] = None,
+        group_id: Optional[int] = None,
         allow_self_paid: bool = False,
         allow_payments: bool = False,
     ) -> Dict[str, Any]:
@@ -1166,6 +1169,7 @@ class SplitLunch(splitwise.Splitwise):
         List[SplitLunchExpense]
         """
         new_transactions, deleted_transactions = self.get_new_transactions(
+            group_id=group_id,
             dated_after=dated_after,
             dated_before=dated_before,
         )
